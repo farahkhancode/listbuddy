@@ -1,0 +1,19 @@
+{
+  "name": "listbuddy",
+  "version": "1.0.0",
+  "description": "A shared shopping-list app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "export NODE_ENV=test && jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/farahkhancode/listbuddy.git"
+  },
+  "author": "Farah Ahmed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/farahkhancode/listbuddy/issues"
+  },
+  "homepage": "https://github.com/farahkhancode/listbuddy#readme"
+}
