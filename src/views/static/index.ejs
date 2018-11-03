@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ./partials/head.ejs %>
+  </head>
+  <body>
+
+     <% include ./partials/navbar.ejs %>
+      <!-- Page Content -->
+      <main class="container">
+
+        <!-- Jumbotron Header -->
+        <header class="jumbotron my-4">
+          <h1 class="display-3">Welcome to ListBuddy</h1>
+          <p class="lead">An application for users to share shopping lists.</p>
+          <a href="#" class="btn btn-primary btn-lg">Sign up</a>
+        </header>
+
+        <!-- Page Features -->
+        <section class="row text-center">
+
+          <section class="col-lg-4">
+            <h4 class="card-title">Create a List</h4>
+            <p class="card-text">Create any kind of shopping list.</p>
+          </section>
+
+          <section class="col-lg-4">
+            <h4 class="card-title">Make changes to your items</h4>
+            <p class="card-text">You may add, edit, or delete items, as well as mark as purchased!</p>
+          </section>
+
+          <section class="col-lg-4">
+            <h4 class="card-title">Share your List</h4>
+            <p class="card-text">Share your list with other users to reduce your workload!</p>
+          </section>
+
+        </section>
+        <!-- /.row -->
+
+      </main>
+      <!-- /.container -->
+       <% include ./partials/baseScripts.ejs %>
+        </body>
+</html>
