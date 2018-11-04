@@ -7,11 +7,35 @@
     <% include ../static/partials/navbar.ejs %>
 
     <main class="container">
-      <a href="/lists/<%= list.id %>/edit" class="btn btn-warning">Edit</a>
-      <form style="display:initial" action="/lists/<%= list.id %>/destroy" method="post">
-      <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
+
       <h1><%= list.title %></h1>
+
+      <a href="/lists/<%= list.id %>/edit" class="btn btn-warning">Edit List</a>
+      <form style="display:initial" action="/lists/<%= list.id %>/destroy" method="item">
+      <button type="submit" class="btn btn-danger">Delete List</button>
+    </form>
+
+      <hr>
+
+  <h1>Items</h1>
+
+  <ul class="list-group">
+    <a href="/lists/<%= list.id %>/items/new" class="btn btn-success">+</a>
+    <% list.items.forEach((item) => { %>
+      <li class="list-group-item">
+        <p> <%= item.description %>
+           <form style="display:initial" action="/lists/<%= item.listId %>/items/<%= item.id %>/update" method="item">
+            <input type="checkbox" name="isPurchased" value="<%= item.isPurchased %>">
+          </form>
+        <form style="display:initial" action="/lists/<%= item.listId %>/items/<%= item.id %>/destroy" method="item">
+          <button type="submit" class="btn btn-danger">Delete Item</button>
+       </form>
+         <a href="/lists/<%= item.listId %>/items/<%= item.id %>/edit" class="btn btn-warning">Edit Item</a>
+        </p>
+      </li>
+    <% }) %>
+
+  </ul>
 
     </main>
 
