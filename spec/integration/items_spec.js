@@ -1,6 +1,6 @@
 const request = require("request");
 const server = require("../../src/server");
-const base = "http://localhost:3000/items";
+const base = "http://localhost:3000/lists";
 
 const sequelize = require("../../src/db/models/index").sequelize;
 const List = require("../../src/db/models").List;
@@ -10,7 +10,7 @@ describe("routes : items", () => {
 
   beforeEach((done) => {
     this.item;
-    this.item;
+    this.list;
 
     sequelize.sync({force: true}).then((res) => {
 
@@ -18,11 +18,11 @@ describe("routes : items", () => {
       List.create({
         title: "Back to School"
       })
-      .then((item) => {
-        this.item = item;
+      .then((list) => {
+        this.list = list;
 
         Item.create({
-          title: "12 HB #2 pencils",
+          description: "12 HB #2 pencils",
           itemId: this.item.id
         })
         .then((item) => {
@@ -43,7 +43,7 @@ describe("routes : items", () => {
        request.get(`${base}/${this.list.id}/items/${this.item.id}/edit`, (err, res, body) => {
          expect(err).toBeNull();
          expect(body).toContain("Edit Item");
-         expect(body).toContain("Back to School");
+         expect(body).toContain("12 HB #2 pencils");
          done();
        });
      });
@@ -53,10 +53,10 @@ describe("routes : items", () => {
    describe("POST /lists/:listId/items/:id/update", () => {
 
      it("should return a status code 302", (done) => {
-       request.item({
+       request.post({
          url: `${base}/${list.id}/items/${item.id}/update`,
          form: {
-           description: "Back to School"
+           description: "12 HB #2 pencils"
          }
        }, (err, res, body) => {
          expect(res.statusCode).toBe(302);
@@ -68,10 +68,10 @@ describe("routes : items", () => {
          const options = {
            url: `${base}/${this.list.id}/items/${this.item.id}/update`,
            form: {
-             description: "Thanksgiving Party"
+             description: "Spiral notebooks"
            }
          };
-         request.item(options,
+         request.post(options,
            (err, res, body) => {
 
            expect(err).toBeNull();
@@ -80,7 +80,7 @@ describe("routes : items", () => {
              where: {id: this.item.id}
            })
            .then((item) => {
-             expect(item.title).toBe("Thanksgiving Party");
+             expect(item.description).toBe("Spiral notebooks");
              done();
            });
          });
@@ -88,13 +88,13 @@ describe("routes : items", () => {
 
    });
 
-  describe("POST /items/:itemId/items/:id/destroy", () => {
+  describe("POST /lists/:listId/items/:id/destroy", () => {
 
     it("should delete the item with the associated ID", (done) => {
 
       expect(item.id).toBe(1);
 
-      request.item(`${base}/${this.item.id}/items/${this.item.id}/destroy`, (err, res, body) => {
+      request.post(`${base}/${this.item.id}/items/${this.item.id}/destroy`, (err, res, body) => {
 
         Item.findById(1)
         .then((item) => {
@@ -108,7 +108,7 @@ describe("routes : items", () => {
 
   });
 
-  describe("GET /items/:itemId/items/new", () => {
+  describe("GET /lists/:listId/items/new", () => {
 
       it("should render a new item form", (done) => {
         request.get(`${base}/${item.id}/items/new`, (err, res, body) => {
@@ -120,7 +120,30 @@ describe("routes : items", () => {
   });
 
 
-  describe("POST /items/:itemId/items/create", () => {
+  describe("POST /lists/:listId/items/create", () => {
+
+   it("should not create a new item that fails validations", (done) => {
+       const options ={
+         url: `${base}/${this.list.id}/posts/create`,
+           form: {
+             description: "a"
+           }
+         };
+         request.post(options,
+              (err, res, body) => {
+                Item.findOne({where: {description: "a"}})
+                .then((item) => {
+                    expect(item).toBeNull();
+                    done();
+                })
+                .catch((err) => {
+                  console.log(err);
+                  done();
+                });
+              }
+            );
+          });
+
 
    it("should create a new item and redirect", (done) => {
       const options = {
@@ -129,13 +152,13 @@ describe("routes : items", () => {
           description: "Cake"
         }
       };
-      request.item(options,
+      request.post(options,
         (err, res, body) => {
 
           Item.findOne({where: {description: "Cake"}})
           .then((item) => {
             expect(item).not.toBeNull();
-            expect(item.title).toBe("Cake");
+            expect(item.description).toBe("Cake");
             expect(item.itemId).not.toBeNull();
             done();
           })
