@@ -3,7 +3,7 @@ const Authorizer = require("../policies/list");
 
 module.exports = {
   index(req, res, next){
-  listQueries.getAllLists((err, lists) => {
+    listQueries.getAllLists((err, lists) => {
          if(err){
            res.redirect(500, "static/index");
          } else {
@@ -68,17 +68,16 @@ module.exports = {
 
   create(req, res, next){
 
-// #1
     const authorized = new Authorizer(req.user).create();
-
-
     if(authorized) {
       let newList = {
         title: req.body.title,
         id: req.body.id
       };
+
       listQueries.addList(newList, (err, list) => {
         if(err){
+          console.log(err);
           res.redirect(500, "lists/new");
         } else {
           res.redirect(303, `/lists/${list.id}`);

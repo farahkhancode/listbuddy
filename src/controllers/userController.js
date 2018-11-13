@@ -43,7 +43,7 @@ create(req, res, next){
 
          passport.authenticate("local")(req, res, () => {
            req.flash("notice", "You've successfully signed in!");
-           res.redirect("/");
+           res.redirect("/lists");
          })
        }
      });
