@@ -22,12 +22,12 @@ module.exports = {
        });
      },
 
-    destroy(req, res, next){
+destroy(req, res, next){
      itemQueries.deleteItem(req.params.id, (err, deletedRecordsCount) => {
        if(err){
          res.redirect(500, `/lists/${req.params.listId}`)
        } else {
-         res.redirect(303, `/lists/${req.params.listId}`)
+         res.redirect(303, "/lists")
        }
      });
    },

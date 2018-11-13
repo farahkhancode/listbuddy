@@ -17,7 +17,7 @@ signIn(req, res, next){
            res.redirect("/users/sign_in");
          } else {
            req.flash("notice", "You've successfully signed in!");
-           res.redirect("/");
+           res.redirect("/lists");
          }
        })
   },

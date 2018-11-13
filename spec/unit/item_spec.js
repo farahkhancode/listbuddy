@@ -1,6 +1,7 @@
 const sequelize = require("../../src/db/models/index").sequelize;
 const List = require("../../src/db/models").List;
 const Item = require("../../src/db/models").Item;
+const User = require("../../src/db/models").User;
 
 describe("Item", () => {
 
@@ -8,8 +9,16 @@ describe("Item", () => {
 //#1
     this.list;
     this.item;
+    this.user;
+
     sequelize.sync({force: true}).then((res) => {
 
+      User.create({
+         email: "starman@tesla.com",
+         password: "Trekkie4lyfe"
+       })
+       .then((user) => {
+         this.user = user; //store the user
 //#2
       List.create({
         title: "Birthday Party"

@@ -4,12 +4,16 @@
     <% include ../static/partials/head.ejs %>
   </head>
   <body>
+    <% include ../static/partials/navbar.ejs %>
     <main class="container">
-      <% include ../static/partials/navbar.ejs %>
+
+       <% include ../static/partials/messages.ejs %>
 
       <h1>Lists</h1>
 
+      <% if(currentUser) { %>
         <a href="/lists/new" class="btn btn-success">New List</a>
+      <% } %>
 
       <ul class="list-group">
 <!-- #1 -->

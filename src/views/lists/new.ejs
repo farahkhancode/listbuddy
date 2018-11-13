@@ -6,11 +6,12 @@
     <% include ../static/partials/navbar.ejs %>
 
     <main class="container">
+      <% include ../static/partials/messages.ejs %>
 
       <h1>New List</h1>
 
       <form action="/lists/create" method="post">
-        
+
         <div class="form-group">
           <label for="title">List title</label>
           <input type="text" class="form-control" name="title" aria-describedby="titleHelp" placeholder="Enter Title">
