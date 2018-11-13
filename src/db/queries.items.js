@@ -13,6 +13,26 @@ module.exports = {
      })
    },
 
+   togglePurchased(id, purchasedItem, callback){
+   return Item.findById(id)
+   .then((item) => {
+     if(!item){
+       return callback("Item not found");
+     }
+     item.update(purchasedItem, {
+       isPurchased: !purchasedItem.isPurchased
+     })
+     .then(() => {
+       console.log(item.isPurchased);
+       console.log('calling queries');
+       callback(null, item);
+     })
+     .catch((err) => {
+       callback(err);
+     });
+   });
+ },
+
    deleteItem(id, callback){
       return Item.destroy({
         where: { id }

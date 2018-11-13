@@ -27,12 +27,11 @@
       <li class="list-group-item">
         <p> <%= item.description %>
 
-           <form style="display:initial" action="/lists/<%= item.listId %>/items/<%= item.id %>/update" method="item">
-            <input type="checkbox" name="isPurchased" value="<%= item.isPurchased %>">
-          </form>
+
+        <input  id="checkbox" type="checkbox" name="isPurchased" value="<%= item.isPurchased %>">
 
 
-        <form style="display:initial" action="/lists/<%= item.listId %>/items/<%= item.id %>/destroy" method="item">
+        <form style="display:initial" action="/lists/<%= item.listId %>/items/<%= item.id %>/destroy" method="post">
           <button type="submit" class="btn btn-danger">Delete Item</button>
        </form>
          <a href="/lists/<%= item.listId %>/items/<%= item.id %>/edit" class="btn btn-warning">Edit Item</a>
@@ -44,7 +43,17 @@
 
     </main>
 
-    <% include ../static/partials/baseScripts.ejs %>
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+
+      var checkbox = document.getElementbyId("checkbox");
+      checkbox.addEventListener('change', item.togglePurchased);
+
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 
   </body>
 </html>

@@ -22,12 +22,23 @@ module.exports = {
        });
      },
 
+togglePurchased(req, res, next){
+  itemQueries.togglePurchased(req.params.id, req.body, (err, item) => {
+    if(err || item == null){
+      res.redirect(404, `/lists/${req.params.listId}`);
+    } else {
+      console.log('calling controller');
+      res.redirect(`/lists/${req.params.listId}`, {item});
+    }
+  });
+},
+
 destroy(req, res, next){
      itemQueries.deleteItem(req.params.id, (err, deletedRecordsCount) => {
        if(err){
          res.redirect(500, `/lists/${req.params.listId}`)
        } else {
-         res.redirect(303, "/lists")
+         res.redirect(303, `/lists/${req.params.listId}`)
        }
      });
    },
