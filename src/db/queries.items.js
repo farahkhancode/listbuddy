@@ -13,18 +13,13 @@ module.exports = {
      })
    },
 
-   togglePurchased(id, purchasedItem, callback){
+   toggled(id, purchasedItem, callback){
    return Item.findById(id)
    .then((item) => {
-     if(!item){
-       return callback("Item not found");
-     }
      item.update(purchasedItem, {
        isPurchased: !purchasedItem.isPurchased
      })
-     .then(() => {
-       console.log(item.isPurchased);
-       console.log('calling queries');
+     .then((item) => {
        callback(null, item);
      })
      .catch((err) => {

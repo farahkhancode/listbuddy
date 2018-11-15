@@ -23,11 +23,10 @@ module.exports = {
      },
 
 togglePurchased(req, res, next){
-  itemQueries.togglePurchased(req.params.id, req.body, (err, item) => {
+  itemQueries.toggled(req.params.id, req.body, (err, item) => {
     if(err || item == null){
       res.redirect(404, `/lists/${req.params.listId}`);
     } else {
-      console.log('calling controller');
       res.redirect(`/lists/${req.params.listId}`, {item});
     }
   });
