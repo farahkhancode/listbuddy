@@ -13,21 +13,6 @@ module.exports = {
      })
    },
 
-   toggled(id, purchasedItem, callback){
-   return Item.findById(id)
-   .then((item) => {
-     item.update(purchasedItem, {
-       isPurchased: !purchasedItem.isPurchased
-     })
-     .then((item) => {
-       callback(null, item);
-     })
-     .catch((err) => {
-       callback(err);
-     });
-   });
- },
-
    deleteItem(id, callback){
       return Item.destroy({
         where: { id }

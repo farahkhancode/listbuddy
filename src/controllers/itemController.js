@@ -22,15 +22,6 @@ module.exports = {
        });
      },
 
-togglePurchased(req, res, next){
-  itemQueries.toggled(req.params.id, req.body, (err, item) => {
-    if(err || item == null){
-      res.redirect(404, `/lists/${req.params.listId}`);
-    } else {
-      res.redirect(`/lists/${req.params.listId}`, {item});
-    }
-  });
-},
 
 destroy(req, res, next){
      itemQueries.deleteItem(req.params.id, (err, deletedRecordsCount) => {

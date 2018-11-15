@@ -28,8 +28,7 @@
         <p> <%= item.description %>
 
 
-        <input  id="checkbox" onchange="toggle()" type="checkbox" name="isPurchased" value="<%= item.isPurchased %>">
-
+        <input  id="checkbox" type="checkbox" name="isPurchased" value="<%= item.isPurchased %>">
 
         <form style="display:initial" action="/lists/<%= item.listId %>/items/<%= item.id %>/destroy" method="post">
           <button type="submit" class="btn btn-danger">Delete Item</button>
@@ -49,12 +48,7 @@
       crossorigin="anonymous">
     </script>
 
-    <script type="text/javascript">
-      function toggle(){
-        var checkbox = document.getElementbyId("checkbox");
-        checkbox.addEventListener('change', item.togglePurchased);
-      }
-   </script>
+
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
