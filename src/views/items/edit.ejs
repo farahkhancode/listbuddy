@@ -19,7 +19,8 @@
         </div>
 
         <div class="form-group">
-          <input type="checkbox" name="isPurchased" value="<%= item.isPurchased %>">
+          <label for="isPurchased">Purchased?</label>
+          <input type="checkbox" class="form-control" name="isPurchased" value=<%= item.isPurchased %> <%= item.isPurchased ? "checked" : "" %>   />
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>
@@ -28,6 +29,17 @@
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>
+  <script>
 
+     $(document).ready(function(){
+        $('input[type="checkbox"]').change(function(){
+          let value = $(this).val();
+          console.log(value);
+          value == 'true' ? $(this).attr('value', 'false') :  $(this).attr('value', 'true');
+        });
+
+     });
+
+  </script>
   </body>
 </html>

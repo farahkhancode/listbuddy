@@ -6,7 +6,6 @@ const listController = require("../controllers/listController");
  const helper = require("../auth/helpers");
 
 
-
 router.get("/lists/:listId/items/new", itemController.new);
 router.post("/lists/:listId/items/create", helper.ensureAuthenticated, validation.validateItems, itemController.create);
 router.post("/lists/:listId/items/:id/destroy", itemController.destroy);

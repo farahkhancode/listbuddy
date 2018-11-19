@@ -11,7 +11,7 @@
       <h1><%= list.title %></h1>
       <% if(currentUser) { %>
       <a href="/lists/<%= list.id %>/edit" class="btn btn-warning">Edit List</a>
-      <form style="display:initial" action="/lists/<%= list.id %>/destroy" method="item">
+      <form style="display:initial" action="/lists/<%= list.id %>/destroy" method="post">
       <button type="submit" class="btn btn-danger">Delete List</button>
     </form>
       <% } %>
@@ -28,8 +28,6 @@
         <p> <%= item.description %>
 
 
-        <input  id="checkbox" type="checkbox" name="isPurchased" value="<%= item.isPurchased %>">
-
         <form style="display:initial" action="/lists/<%= item.listId %>/items/<%= item.id %>/destroy" method="post">
           <button type="submit" class="btn btn-danger">Delete Item</button>
        </form>
@@ -42,16 +40,6 @@
 
     </main>
 
-    <script
-      src="http://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous">
-    </script>
-
-
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
+  <% include ../static/partials/baseScripts.ejs %>
   </body>
 </html>
