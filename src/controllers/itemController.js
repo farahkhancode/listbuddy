@@ -34,13 +34,19 @@ destroy(req, res, next){
    },
 
 update(req, res, next){
-      console.log(req.body);
-     itemQueries.updateItem(req.params.id, req.body, (err, item) => {
+        //console.log(req.body);
+
+      var newItem = {
+        description: req.body.description,
+        isPurchased: req.body.isPurchased === 'true'
+      };
+
+      console.log(newItem);
+
+     itemQueries.updateItem(req.params.id, newItem, (err, item) => {
        if(err || item == null){
-         console.log(req.body);
          res.redirect(404, `/lists/${req.params.listId}/items/${req.params.id}/edit`);
        } else {
-         console.log(req.body);
          res.redirect(`/lists/${req.params.listId}`);
        }
      });

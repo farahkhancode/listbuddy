@@ -27,6 +27,9 @@
       <li class="list-group-item">
         <p> <%= item.description %>
 
+    <% if(item.isPurchased) { %>
+       <p id="purchased">Purchased!</p>
+    <% } %>
 
         <form style="display:initial" action="/lists/<%= item.listId %>/items/<%= item.id %>/destroy" method="post">
           <button type="submit" class="btn btn-danger">Delete Item</button>

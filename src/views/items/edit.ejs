@@ -20,7 +20,7 @@
 
         <div class="form-group">
           <label for="isPurchased">Purchased?</label>
-          <input type="checkbox" class="form-control" name="isPurchased" value=<%= item.isPurchased %> <%= item.isPurchased ? "checked" : "" %>   />
+          <input type="checkbox" class="form-control" name="isPurchased" value= "<%= item.isPurchased %>" <%= item.isPurchased ? "checked" : "" %>   />
         </div>
 
         <button type="submit" class="btn btn-primary">Update</button>
@@ -32,7 +32,7 @@
   <script>
 
      $(document).ready(function(){
-        $('input[type="checkbox"]').change(function(){
+        $('input[type="checkbox"]').click(function(){
           let value = $(this).val();
           console.log(value);
           value == 'true' ? $(this).attr('value', 'false') :  $(this).attr('value', 'true');
