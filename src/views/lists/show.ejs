@@ -22,13 +22,13 @@
 
   <ul class="list-group">
     <% if(currentUser) { %>
-    <a href="/lists/<%= list.id %>/items/new" class="btn btn-success">+</a>
+    <a href="/lists/<%= list.id %>/items/new" class="btn btn-success">+ Add Item</a>
     <% list.items.forEach((item) => { %>
       <li class="list-group-item">
         <p> <%= item.description %>
 
     <% if(item.isPurchased) { %>
-       <p id="purchased">Purchased!</p>
+       <p id="purchased"><b>Purchased!</b></p>
     <% } %>
 
         <form style="display:initial" action="/lists/<%= item.listId %>/items/<%= item.id %>/destroy" method="post">
